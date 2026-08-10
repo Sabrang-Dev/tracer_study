@@ -1,124 +1,183 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tracer Study — Survei Alumni</title>
-  <meta name="description" content="Kuesioner Tracer Study alumni — sistem survei modern." />
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tracer Study — Survei Alumni</title>
+    <meta
+      name="description"
+      content="Kuesioner Tracer Study alumni — sistem survei modern."
+    />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 
-  <!-- Google Fonts: Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Tailwind CSS (CDN) -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: "#0F4C81", secondary: "#1E88E5", accent: "#E3F2FD",
-            success: "#2E7D32", error: "#D32F2F",
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#0F4C81",
+              secondary: "#1E88E5",
+              accent: "#E3F2FD",
+              success: "#2E7D32",
+              error: "#D32F2F",
+            },
+            fontFamily: { sans: ["Inter", "system-ui", "sans-serif"] },
           },
-          fontFamily: { sans: ["Inter", "system-ui", "sans-serif"] },
         },
-      },
-    };
-  </script>
+      };
+    </script>
 
-  <!-- SweetAlert2 -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-  <link rel="stylesheet" href="css/app.css" />
-</head>
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
 
-<body>
-  <!-- Sticky Header -->
-  <header class="site-header">
-    <div class="container">
-      <div class="header-inner">
-        <div class="brand">
-          <img src="assets/logo.png" alt="Logo" />
-          <div class="brand-text">
-            <div class="brand-title" data-testid="app-title">Tracer Study</div>
-            <div class="brand-sub" data-testid="app-subtitle">Sistem Survei Alumni</div>
+  <body>
+    <!-- Sticky Header -->
+    <header class="site-header">
+      <div class="container">
+        <div class="header-inner">
+          <div class="brand">
+            <img src="assets/logo.png" alt="Logo" />
+            <div class="brand-text">
+              <div class="brand-title" data-testid="app-title">
+                Tracer Study
+              </div>
+              <div class="brand-sub" data-testid="app-subtitle">
+                Sistem Survei Alumni
+              </div>
+            </div>
+          </div>
+          <div class="header-actions">
+            <button id="btn-reset" class="btn-ghost" data-testid="btn-reset">
+              <i data-lucide="rotate-ccw"></i> Reset
+            </button>
           </div>
         </div>
-        <div class="header-actions">
-          <button id="btn-reset" class="btn-ghost" data-testid="btn-reset">
-            <i data-lucide="rotate-ccw"></i> Reset
-          </button>
-        </div>
-      </div>
 
-      <!-- Progress -->
-      <div class="progress-wrap">
-        <div class="progress-meta">
-          <span id="progress-text" data-testid="progress-text">Langkah 1</span>
-          <b id="progress-pct" data-testid="progress-pct">0%</b>
-        </div>
-        <div class="progress-track">
-          <div id="progress-bar" class="progress-bar" data-testid="progress-bar"></div>
-        </div>
-      </div>
-
-      <!-- Stepper -->
-      <nav id="stepper" class="stepper" data-testid="stepper" aria-label="Navigasi langkah"></nav>
-    </div>
-  </header>
-
-  <main>
-    <div class="container">
-      <span id="form-top"></span>
-
-      <!-- Hero intro -->
-      <section class="hero" data-testid="hero">
-        <div>
-          <h1>Kuesioner Tracer Study Alumni</h1>
-          <p>Bantu almamater memetakan perjalanan karier lulusan. Isi kuesioner ini dengan
-             jujur — jawaban Anda tersimpan otomatis dan dapat dilanjutkan kapan saja.</p>
-          <div class="hero-badges">
-            <span class="hero-badge">✔ Autosave</span>
-            <span class="hero-badge">✔ ± 5 menit</span>
-            <span class="hero-badge">✔ Data aman</span>
+        <!-- Progress -->
+        <div class="progress-wrap">
+          <div class="progress-meta">
+            <span id="progress-text" data-testid="progress-text"
+              >Langkah 1</span
+            >
+            <b id="progress-pct" data-testid="progress-pct">0%</b>
+          </div>
+          <div class="progress-track">
+            <div
+              id="progress-bar"
+              class="progress-bar"
+              data-testid="progress-bar"
+            ></div>
           </div>
         </div>
-        <img class="hero-art" src="assets/illustration.png" alt="Ilustrasi Tracer Study" />
-      </section>
 
-      <!-- Steps rendered dynamically from form-schema.js -->
-      <div id="steps-container" data-testid="steps-container"></div>
+        <!-- Stepper -->
+        <nav
+          id="stepper"
+          class="stepper"
+          data-testid="stepper"
+          aria-label="Navigasi langkah"
+        ></nav>
+      </div>
+    </header>
 
-      <!-- Navigation -->
-      <div class="form-nav">
-        <button id="btn-prev" class="btn btn-outline" data-testid="btn-prev">
-          <i data-lucide="arrow-left"></i> Kembali
-        </button>
-        <div>
-          <button id="btn-next" class="btn btn-primary" data-testid="btn-next">
-            Lanjut <i data-lucide="arrow-right"></i>
+    <main>
+      <div class="container">
+        <span id="form-top"></span>
+
+        <!-- Hero intro -->
+        <section class="hero" data-testid="hero">
+          <div>
+            <h1>Kuesioner Tracer Study Alumni</h1>
+            <p>Yth. Alumni,</p>
+
+            <p>
+              Dalam rangka reakreditasi Program Studi Pendidikan Komputer, kami
+              sedang melaksanakan Tracer Study untuk memperoleh informasi
+              mengenai perjalanan karier lulusan, kesesuaian kompetensi dengan
+              dunia kerja. Data yang Anda berikan akan menjadi bahan evaluasi
+              dan pengembangan kurikulum, peningkatan mutu layanan akademik,
+              serta pemenuhan kebutuhan data akreditasi.
+            </p>
+
+            <p>
+              Kami mengharapkan kesediaan Anda untuk mengisi kuesioner ini
+              dengan jujur dan sesuai kondisi saat ini. Seluruh informasi yang
+              diberikan akan dijaga kerahasiaannya dan hanya digunakan untuk
+              kepentingan evaluasi, pengembangan program studi, serta proses
+              reakreditasi.
+            </p>
+
+            <p>
+              Atas partisipasi dan kontribusi Anda, kami ucapkan terima kasih.
+            </p>
+            <div class="hero-badges">
+              <span class="hero-badge">✔ Autosave</span>
+              <span class="hero-badge">✔ ± 5 menit</span>
+              <span class="hero-badge">✔ Data aman</span>
+            </div>
+          </div>
+          <img
+            class="hero-art"
+            src="assets/illustration.png"
+            alt="Ilustrasi Tracer Study"
+          />
+        </section>
+
+        <!-- Steps rendered dynamically from form-schema.js -->
+        <div id="steps-container" data-testid="steps-container"></div>
+
+        <!-- Navigation -->
+        <div class="form-nav">
+          <button id="btn-prev" class="btn btn-outline" data-testid="btn-prev">
+            <i data-lucide="arrow-left"></i> Kembali
           </button>
-          <button id="btn-submit" class="btn btn-success" data-testid="btn-submit" hidden>
-            <i data-lucide="send"></i> Kirim Jawaban
-          </button>
+          <div>
+            <button
+              id="btn-next"
+              class="btn btn-primary"
+              data-testid="btn-next"
+            >
+              Lanjut <i data-lucide="arrow-right"></i>
+            </button>
+            <button
+              id="btn-submit"
+              class="btn btn-success"
+              data-testid="btn-submit"
+              hidden
+            >
+              <i data-lucide="send"></i> Kirim Jawaban
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  </main>
+    </main>
 
-  <!-- App scripts (order matters) -->
-  <script src="js/config.js"></script>
-  <script src="js/form-schema.js"></script>
-  <script src="js/storage.js"></script>
-  <script src="js/validation.js"></script>
-  <script src="js/api.js"></script>
-  <script src="js/renderer.js"></script>
-  <script src="js/navigation.js"></script>
-  <script src="js/app.js"></script>
-  <script>if (window.lucide) window.lucide.createIcons();</script>
-</body>
+    <!-- App scripts (order matters) -->
+    <script src="js/config.js"></script>
+    <script src="js/form-schema.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/renderer.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+      if (window.lucide) window.lucide.createIcons();
+    </script>
+  </body>
 </html>
