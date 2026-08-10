@@ -44,6 +44,8 @@ window.App = (function () {
       if (!first) first = wrap;
     });
     if (first) {
+      console.log(first);
+
       // first.scrollIntoView({ behavior: "smooth", block: "center" });
       window.Swal.fire({
         icon: "error",

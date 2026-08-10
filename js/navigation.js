@@ -60,7 +60,7 @@ window.Nav = (function () {
     updateNavButtons();
     window.Storage.saveStep(id);
     const top = document.getElementById("form-top");
-    // if (top) top.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (top) top.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function next() {
